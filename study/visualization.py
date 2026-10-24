@@ -93,7 +93,7 @@ def plot_timeline(states_real, states_pred, n_show=300, save_path='timeline_stat
 
 
 # -----------------------------------------------------------------------
-# 2.  Confusion Matrix 
+# 2.  Confusion Matrix
 # -----------------------------------------------------------------------
 
 def plot_confusion_matrix(conf_matrix, state_names=None, save_path='confusion_matrix.png'):
@@ -160,7 +160,7 @@ def plot_confusion_matrix(conf_matrix, state_names=None, save_path='confusion_ma
 
 
 # -----------------------------------------------------------------------
-# 3.  Transition matrix A 
+# 3.  Transition matrix A
 # -----------------------------------------------------------------------
 
 def plot_transition_matrix(A_initial, A_final, state_names=None,

@@ -44,19 +44,19 @@ def baseline_comparison(X_train, states_train, X_test, states_test):
     print("\n" + "=" * 65)
     print("BASELINE COMPARISON (Static Models)")
     print("=" * 65)
-    
+
     models = [
-        ("Majority-class", majority_pred), 
+        ("Majority-class", majority_pred),
         ("Random", random_pred),
         ("Random Forest", rf_pred)
     ]
-    
+
     for name, pred in models:
         acc = accuracy_score(test, pred)
         f1  = f1_score(test, pred, labels=[attack_label], average=None, zero_division=0)[0]
         print(f"  {name:20s} — Accuracy: {acc:.4f}  |  F1 Attack: {f1:.4f}")
         results[name] = {'accuracy': acc, 'f1_attack': f1}
-        
+
     print("=" * 65)
     return results
 

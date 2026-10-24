@@ -9,11 +9,11 @@
     "visualization.py": "3f94066e2d4d72e3025cbee79b21bc3739657f6dc28224eb9e2ddaa9d2988e6d"
   },
   "published_study_sha256": {
-    "data_loader.py": "5508c48be3f284190a5392e37e2158c491f1e9189a33eab0f2a40cbf8fbfd3a2",
-    "evaluation.py": "66abcbf6bb422358e1ba47cd03ad82509b25ed8614ac3d731c756cc57246d1da",
-    "hmm_model.py": "6c8e68e72abfe2d0e5913001c33bb2846fde40e38d5bf025af61bde384640767",
-    "main.py": "abc786c13f90d037ced013773b33054b0f71f03f4075d0d2b63b4ea4f35f477c",
-    "visualization.py": "3f94066e2d4d72e3025cbee79b21bc3739657f6dc28224eb9e2ddaa9d2988e6d"
+    "data_loader.py": "670fd3d5aa26a7decd0c642de15ba3cb9a0e7b97d9029254706bed3e51902f13",
+    "evaluation.py": "660ac37cf4f3d884ad67d9470af08e9d3b32fc634098b05971c961730f6eda8e",
+    "hmm_model.py": "14e6d714dec116ea787e582b73f94fc4e9292f13b11eb49c7155a4cfbea1cd5f",
+    "main.py": "adb0dcd0cfa63d625b459a1df9667b6e822c1bbdb61a23ba4cdf9569b0d7a4e0",
+    "visualization.py": "3dd5e9a2fc433cfe0b061c10e06afcf9cb9d525eb24d44e92ba3ec6d8a1ea32a"
   },
-  "changes": "main.py: CLI paths and qualified console terminology; evaluation.py: qualified baseline description. Historical model, loader, plotting algorithms retained. Maintained generic core is separately described in docs/numerics.md."
+  "changes": "main.py: CLI paths and qualified console terminology; evaluation.py: qualified baseline description. Historical model, loader, plotting algorithms retained. Maintained generic core is separately described in docs/numerics.md. Trailing whitespace normalized in study sources."
 }

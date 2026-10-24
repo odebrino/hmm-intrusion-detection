@@ -14,10 +14,10 @@ class DiscreteHMM:
     Discrete Hidden Markov Model.
 
     Parameters:
-    
+
     n_states -> number of hidden states
     n_obs    -> size of observation alphabet
-    
+
     """
     def __init__(self, n_states: int, n_obs: int):
         self.N = n_states
@@ -108,7 +108,7 @@ class DiscreteHMM:
         return log_beta
 
     # ------------------------------------------------------------------
-    # 4.  Computation of ξ 
+    # 4.  Computation of ξ
     # ------------------------------------------------------------------
 
     def compute_xi(self, obs_seq, log_alpha, log_beta):
@@ -132,7 +132,7 @@ class DiscreteHMM:
         return log_xi
 
     # ------------------------------------------------------------------
-    # 5.  Computation of γ 
+    # 5.  Computation of γ
     # ------------------------------------------------------------------
 
     def compute_gamma(self, log_alpha, log_beta):
@@ -183,7 +183,7 @@ class DiscreteHMM:
             log_A_new = log_sum_xi_ij - log_sum_xi_i           # (N, N)
             self.A = np.exp(log_A_new)
             self.A = np.clip(self.A, EPSILON, None)
-            
+
             # --- Topological restriction: limit lingering in Suspicious state ---
             if self.A[1, 1] > 0.4:
                 excess = self.A[1, 1] - 0.4
@@ -204,7 +204,7 @@ class DiscreteHMM:
                 mask = (obs == k)
                 if mask.any():
                     new_B[:, k] = logsumexp(log_gamma[mask], axis=0)
-            
+
             log_sum_gamma = logsumexp(log_gamma, axis=0)
             log_B_new = new_B - log_sum_gamma[:, np.newaxis]
             self.B = np.exp(log_B_new)
@@ -216,9 +216,9 @@ class DiscreteHMM:
                 tp = sum(1 for r, p in zip(val_states, pred_val) if r == 2 and p == 2)
                 fn = sum(1 for r, p in zip(val_states, pred_val) if r == 2 and p != 2)
                 recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-                
+
                 print(f"    Validation Attack Recall : {recall:.4f}")
-                
+
                 if recall > best_recall:
                     best_recall = recall
                     best_A = self.A.copy()
@@ -228,7 +228,7 @@ class DiscreteHMM:
                     patience_counter = 0
                 else:
                     patience_counter += 1
-                    
+
                 if patience_counter >= 2:
                     print(f"    [Early Stopping] No improvement in validation recall for 2 iterations.")
                     print(f"    Restoring best matrices from highest validation recall (Recall = {best_recall:.4f}, LL = {best_ll:.4f})")

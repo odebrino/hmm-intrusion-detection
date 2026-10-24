@@ -9,8 +9,8 @@ import pandas as pd
 
 # Features used for discretization
 FEATURES = [
-    'Flow Packets/s', 
-    'Flow Duration', 
+    'Flow Packets/s',
+    'Flow Duration',
     'Total Fwd Packets',
     'Bwd Packet Length Std',
     'Flow IAT Max',
@@ -26,7 +26,7 @@ def load_and_prepare(filepath, n_samples=None):
     Loads and prepares the dataset for the HMM sequentially.
 
     Returns the raw log-transformed features (X_log) WITHOUT Scaling or K-Means discretization,
-    so the caller can fit the scaler and K-Means strictly on the training set 
+    so the caller can fit the scaler and K-Means strictly on the training set
     to prevent data leakage into the validation/test subsets.
 
     """
@@ -39,7 +39,7 @@ def load_and_prepare(filepath, n_samples=None):
 
     df.replace([np.inf, -np.inf], np.nan, inplace=True)
     required_cols = FEATURES + ['Label']
-    
+
     missing_cols = [c for c in required_cols if c not in df.columns]
     if missing_cols:
         raise ValueError("Requested features not found.")
@@ -61,7 +61,7 @@ def load_and_prepare(filepath, n_samples=None):
     for i in range(n_chunks):
         chunks.append(benign_pool.iloc[i*CHUNK_SIZE : (i+1)*CHUNK_SIZE])
         chunks.append(ddos_pool.iloc[i*CHUNK_SIZE : (i+1)*CHUNK_SIZE])
-        
+
     df = pd.concat(chunks).reset_index(drop=True)
 
     print(f"[data_loader] Extracted temporally interleaved chunks (Chunk size={CHUNK_SIZE})")
@@ -71,7 +71,7 @@ def load_and_prepare(filepath, n_samples=None):
     X = df[FEATURES].values.astype(float)
     X = np.clip(X, 0, None)
     X_log = np.log1p(X)
-    
+
     # --- Map labels to hidden states ---
     def map_label(label):
         label_clean = str(label).strip().upper()

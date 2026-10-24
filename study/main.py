@@ -81,7 +81,7 @@ def main():
         test_size=round(1 - TRAIN_RATIO, 10),
         shuffle=False
     )
-    
+
     # Create validation set (chronological slice of the remainder)
     X_val, X_test, states_val, states_test = train_test_split(
         X_test, states_test, test_size=0.5, shuffle=False
@@ -131,9 +131,9 @@ def main():
     # --- 6. Refinement via Baum-Welch ---
     print("\n[main] Step 2: Baum-Welch Algorithm (EM)...")
     log_likelihoods, ll_final = hmm.baum_welch(
-        obs_train.tolist(), 
-        n_iter=N_BW_ITER, 
-        val_obs=obs_val.tolist(), 
+        obs_train.tolist(),
+        n_iter=N_BW_ITER,
+        val_obs=obs_val.tolist(),
         val_states=states_val.tolist()
     )
 
