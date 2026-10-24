@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=78"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hmm-intrusion-detection"
+version = "0.1.0"
+description = "Log-space categorical HMM inference with a documented ordered-stream intrusion-detection study."
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+authors = [{name = "Rafael Ode Brino"}]
+license = "MIT"
+dependencies = ["numpy==2.5.4", "scipy==1.18.1", "matplotlib==3.11.2"]
+
+[project.optional-dependencies]
+study = ["pandas==3.1.0", "scikit-learn==1.9.1"]
+dev = ["pytest==9.1.1"]
+
+[project.urls]
+Repository = "https://github.com/odebrino/hmm-intrusion-detection"
+
+[tool.setuptools.packages.find]
+include = ["hmm_ids*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

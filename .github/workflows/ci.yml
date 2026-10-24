@@ -1,0 +1,59 @@
+name: Numerical checks
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  numerical:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.14']
+    env:
+      MPLBACKEND: Agg
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install '.[study,dev]'
+      - run: python -m pip check
+      - run: python -m pytest -q
+      - run: python -m hmm_ids.demo --output-dir outputs/demo
+      - name: Check study entry point
+        run: python study/main.py --help
+      - uses: actions/upload-artifact@v7
+        with:
+          name: inference-demo-python-${{ matrix.python }}
+          path: outputs/demo/
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: numerical
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build
+      - run: python -m build
+      - name: Publish tested packages and report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* report/Report.pdf --verify-tag --title "HMM inference and IDS study $GITHUB_REF_NAME" --notes-file RELEASE_NOTES.md

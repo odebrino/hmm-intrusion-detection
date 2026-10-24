@@ -1,0 +1,19 @@
+{
+  "source": "Candidate-supplied Markov project files, 24 October 2026",
+  "author": "Rafael Ode Brino",
+  "original_source_sha256": {
+    "data_loader.py": "5508c48be3f284190a5392e37e2158c491f1e9189a33eab0f2a40cbf8fbfd3a2",
+    "evaluation.py": "8e8ff354e09c010774f46af014b641c061e095c9c3639af0f14032a0e9504ef9",
+    "hmm_model.py": "6c8e68e72abfe2d0e5913001c33bb2846fde40e38d5bf025af61bde384640767",
+    "main.py": "5e5bdd977e9f239da478f3dbf20c6e08e8dbbf7d4dfc8f151d84dc3518d77748",
+    "visualization.py": "3f94066e2d4d72e3025cbee79b21bc3739657f6dc28224eb9e2ddaa9d2988e6d"
+  },
+  "published_study_sha256": {
+    "data_loader.py": "5508c48be3f284190a5392e37e2158c491f1e9189a33eab0f2a40cbf8fbfd3a2",
+    "evaluation.py": "66abcbf6bb422358e1ba47cd03ad82509b25ed8614ac3d731c756cc57246d1da",
+    "hmm_model.py": "6c8e68e72abfe2d0e5913001c33bb2846fde40e38d5bf025af61bde384640767",
+    "main.py": "abc786c13f90d037ced013773b33054b0f71f03f4075d0d2b63b4ea4f35f477c",
+    "visualization.py": "3f94066e2d4d72e3025cbee79b21bc3739657f6dc28224eb9e2ddaa9d2988e6d"
+  },
+  "changes": "main.py: CLI paths and qualified console terminology; evaluation.py: qualified baseline description. Historical model, loader, plotting algorithms retained. Maintained generic core is separately described in docs/numerics.md."
+}
